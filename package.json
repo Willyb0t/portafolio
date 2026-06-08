@@ -1,12 +1,36 @@
 {
-  "name": "portafolio",
-  "version": "0.1.0",
-  "private": true,
+  "name": "willyb0t-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio of Willyb0t - Physics Enthusiast & Full-Stack Developer",
+  "main": "index.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "format": "prettier --write \"**/*.{js,ts,jsx,tsx,css,md}\"",
+    "analyze": "ANALYZE=true next build"
+  },
+  "keywords": [
+    "portfolio",
+    "nextjs",
+    "typescript",
+    "tailwindcss",
+    "framer-motion",
+    "physics",
+    "science"
+  ],
+  "author": "Willyb0t",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/willyb0t/portfolio/issues"
+  },
+  "homepage": "https://github.com/willyb0t/portfolio#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willyb0t/portfolio.git"
   },
   "dependencies": {
     "next": "16.2.7",
