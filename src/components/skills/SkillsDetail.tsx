@@ -23,7 +23,7 @@ export default function SkillsDetail() {
       <GlassmorphismCard>
         <Typography variant="body1" color="white" align="left" className="space-y-4">
           <p>
-            Below is a breakdown of the technologies I've worked with, based on project experience:
+            Below is a breakdown of the technologies I have worked with, based on project experience:
           </p>
           <div className="space-y-2">
             {sortedTech.map((tech, index) => (

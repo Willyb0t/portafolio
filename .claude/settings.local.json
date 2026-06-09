@@ -14,7 +14,11 @@
       "Bash(curl -s http://localhost:3000)",
       "Bash(npx tsc *)",
       "Bash(curl -s http://localhost:3001)",
-      "Bash(pkill *)"
+      "Bash(pkill *)",
+      "Bash(git config *)",
+      "Bash(npx next *)",
+      "Bash(npx eslint *)",
+      "Bash(kill %1 *)"
     ]
   }
 }

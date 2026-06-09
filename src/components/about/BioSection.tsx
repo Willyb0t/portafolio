@@ -18,7 +18,7 @@ export default function BioSection() {
             to approach software development with analytical thinking and creative intuition.
           </p>
           <p>
-            When I'm not coding, you can find me exploring astronomical phenomena, reading about
+            When I am not coding, you can find me exploring astronomical phenomena, reading about
             quantum mechanics, or experimenting with new ways to visualize scientific concepts.
           </p>
         </Typography>

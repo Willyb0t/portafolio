@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
-import { Typography } from '@/components/ui/Typography';
 import { Project } from '@/data/projects';
 
 interface ProjectFiltersProps {

@@ -41,6 +41,34 @@ npm run build
 npm start
 ```
 
+## Deployment
+
+### Deploying to Vercel
+
+This project is configured for easy deployment to Vercel:
+
+1. Push your code to a GitHub repository
+2. Import the project in Vercel (vercel.com)
+3. Vercel will automatically detect the Next.js configuration
+4. Click "Deploy" - Vercel will handle the build and deployment
+
+Alternatively, you can deploy using the Vercel CLI:
+
+```bash
+npm i -g vercel
+vercel
+```
+
+### Deploying to Other Platforms
+
+For other hosting platforms, you can build the project and serve the static output:
+
+```bash
+npm run build
+# The output will be in the .next directory
+# You can serve this with any static file server
+```
+
 ## Project Structure
 
 - `/src/app` - Next.js app router pages and layouts

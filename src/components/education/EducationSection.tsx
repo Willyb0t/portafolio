@@ -27,7 +27,7 @@ export default function EducationSection() {
                 Thesis:
               </Typography>
               <Typography variant="body1" color="white" align="left" className="ml-4">
-                "Applications of Quantum Computing in Cryptographic Systems"
+                &quot;Applications of Quantum Computing in Cryptographic Systems&quot;
               </Typography>
             </div>
           </div>
@@ -49,7 +49,7 @@ export default function EducationSection() {
                 Thesis:
               </Typography>
               <Typography variant="body1" color="white" align="left" className="ml-4">
-                "Interactive Visualization Techniques for Complex Scientific Data"
+                &quot;Interactive Visualization Techniques for Complex Scientific Data&quot;
               </Typography>
             </div>
           </div>
