@@ -13,9 +13,9 @@ export const GlassmorphismCard: FC<GlassmorphismCardProps> = ({
   title,
 }) => {
   return (
-    <div className={`${styles.glassmorphism-card} ${className}`}>
-      {title && <h3 className={`${styles['card-title']}`}>{title}</h3>}
-      <div className={`${styles['card-content']}`}>{children}</div>
+    <div className={styles['glassmorphism-card'] + ' ' + (className || '')}>
+      {title && <h3 className={styles['card-title'] + ''}>{title}</h3>}
+      <div className={styles['card-content'] + ''}>{children}</div>
     </div>
   );
 };

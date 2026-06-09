@@ -8,6 +8,7 @@ interface ButtonProps {
   asChild?: boolean;
   href?: string;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 export const Button: FC<ButtonProps> = ({
@@ -18,6 +19,7 @@ export const Button: FC<ButtonProps> = ({
   asChild = false,
   href,
   onClick,
+  disabled = false,
 }) => {
   const Component = asChild || href ? 'a' : 'button';
 
@@ -39,6 +41,7 @@ export const Button: FC<ButtonProps> = ({
       className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       href={href}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </Component>

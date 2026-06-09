@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { GlassmorphismCard } from '@/components/ui/GlassmorphismCard';
 import { Typography } from '@/components/ui/Typography';
@@ -27,8 +29,11 @@ export default function ContactForm() {
     setFormState(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    submitForm();
+  };
+
+  const submitForm = async () => {
     setIsSubmitting(true);
 
     // Simulate API call
@@ -75,7 +80,7 @@ export default function ContactForm() {
         </div>
       )}
       <GlassmorphismCard>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="space-y-4">
           <div>
             <Typography variant="body2" color="white" align="left" className="mb-2">
               Name
@@ -127,7 +132,7 @@ export default function ContactForm() {
               value={formState.message}
               onChange={handleChange}
               className="w-full px-4 py-3 bg-gray-800/20 text-white border border-gray-600/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent"
-              rows="6"
+              rows={6}
               placeholder="Your message here..."
               required
             />
@@ -136,8 +141,8 @@ export default function ContactForm() {
             <Button
               variant="primary"
               size="lg"
-              isLoading={isSubmitting}
               onClick={handleSubmit}
+              disabled={isSubmitting}
             >
               {isSubmitting ? 'Sending...' : 'Send Message'}
             </Button>
