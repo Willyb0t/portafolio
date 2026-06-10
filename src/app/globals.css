@@ -53,3 +53,46 @@
     animation: none !important;
   }
 }
+
+
+/* Starfield animations */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.meteor {
+  position: fixed;
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 50%;
+  background: white;
+  animation: meteorFall linear forwards;
+}
+
+@keyframes meteorFall {
+  0% {
+    transform: translateY(-10vh) translateX(-10vw);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(110vh) translateX(110vw);
+    opacity: 0.6;
+  }
+}
+
+/* Pulse animation for interactive elements */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}

@@ -6,12 +6,12 @@ export default function OrbitalSystem({
   id,
   centerX = 50,
   centerY = 50,
-  radiusX = 100,
-  radiusY = 60,
-  speed = 0.05,
+  radiusX = 120,
+  radiusY = 80,
+  speed = 0.03,
   planetColor = '#4a90e2',
-  planetSize = 12,
-  trailLength = 5,
+  planetSize = 16,
+  trailLength = 8,
   className = '',
 }: {
   id?: string;
@@ -42,38 +42,45 @@ export default function OrbitalSystem({
     container.style.left = `${centerX}%`;
     container.style.top = `${centerY}%`;
 
-    // Create orbit path (simplified as a circle)
+    // Create orbit path (ellipse)
     const path = document.createElement('div');
     path.style.position = 'absolute';
     path.style.border = `1px solid ${planetColor}`;
     path.style.borderRadius = '50%';
     path.style.width = `${radiusX * 2}px`;
     path.style.height = `${radiusY * 2}px`;
-    path.style.opacity = '0.3';
+    path.style.opacity = '0.4';
     path.style.left = `-${radiusX}px`;
     path.style.top = `-${radiusY}px`;
+    path.style.boxShadow = `0 0 15px rgba(74, 144, 226, 0.3)`;
 
-    // Create planet (simplified as a dot)
+    // Create planet (enhanced visualization)
     const planet = document.createElement('div');
     planet.style.position = 'absolute';
     planet.style.width = `${planetSize}px`;
     planet.style.height = `${planetSize}px`;
     planet.style.backgroundColor = planetColor;
     planet.style.borderRadius = '50%';
-    planet.style.boxShadow = `0 0 10px rgba(0, 0, 0, 0.5)`;
+    planet.style.boxShadow = `
+      0 0 10px rgba(74, 144, 226, 0.5),
+      0 0 20px rgba(74, 144, 226, 0.3),
+      inset 0 0 5px rgba(255, 255, 255, 0.3)
+    `;
     planet.style.left = `calc(50% - ${planetSize / 2}px)`;
     planet.style.top = `calc(50% - ${planetSize / 2}px)`;
 
-    // Create trail points (simplified)
+    // Create trail points
     const trailPoints: HTMLDivElement[] = [];
     for (let i = 0; i < trailLength; i++) {
       const trailPoint = document.createElement('div');
       trailPoint.style.position = 'absolute';
-      trailPoint.style.width = `${planetSize * 0.6}px`;
-      trailPoint.style.height = `${planetSize * 0.6}px`;
+      const size = planetSize * 0.5 * (1 - i / trailLength);
+      trailPoint.style.width = `${size}px`;
+      trailPoint.style.height = `${size}px`;
       trailPoint.style.backgroundColor = planetColor;
       trailPoint.style.borderRadius = '50%';
-      trailPoint.style.opacity = `${0.3 * (1 - i / trailLength)}`;
+      trailPoint.style.opacity = `${0.4 * (1 - i / trailLength)}`;
+      trailPoint.style.boxShadow = `0 0 5px rgba(74, 144, 226, 0.3)`;
       trailPoints.push(trailPoint);
     }
 
@@ -100,13 +107,13 @@ export default function OrbitalSystem({
       // Update trail points
       trailPoints.forEach((trailPoint, index) => {
         const trailAngle = angle - (index + 1) * 0.1;
-        const trailRadius = radiusX * (1 - index / trailLength * 0.5);
+        const trailRadius = radiusX * (1 - index / trailLength * 0.3);
         const trailX = Math.cos(trailAngle) * trailRadius;
         const trailY = Math.sin(trailAngle) * trailRadius * (radiusY / radiusX);
 
         trailPoint.style.left = `calc(50% + ${trailX}px)`;
         trailPoint.style.top = `calc(50% + ${trailY}px)`;
-        trailPoint.style.opacity = `${0.3 * (1 - index / trailLength)}`;
+        trailPoint.style.opacity = `${0.4 * (1 - index / trailLength)}`;
       });
 
       requestAnimationFrame(animate);
