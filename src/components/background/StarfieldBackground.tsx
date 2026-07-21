@@ -1,181 +1,143 @@
-'use client';
+"use client";
+import React, { useEffect, useRef } from 'react';
 
-import { useEffect, useRef, useState } from 'react';
-
-export default function StarfieldBackground({
-  starCount = 80,
-  enableCursorInteraction = true,
-  enableComets = true,
-  className = '',
-}: {
-  starCount?: number;
-  enableCursorInteraction?: boolean;
-  enableComets?: boolean;
-  className?: string;
-}) {
-  const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null);
-  const mouseMoveRef = useRef<(e: MouseEvent) => void | null>(null);
+export default function StarfieldBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    // Create a simple starfield background
-    const starsContainer = document.createElement('div');
-    starsContainer.style.position = 'fixed';
-    starsContainer.style.top = '0';
-    starsContainer.style.left = '0';
-    starsContainer.style.width = '100%';
-    starsContainer.style.height = '100%';
-    starsContainer.style.pointerEvents = 'none';
-    starsContainer.style.zIndex = '-1';
-    starsContainer.style.overflow = 'hidden';
-    starsContainer.className = className;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-    // Create stars
-    const stars: HTMLDivElement[] = [];
-    for (let i = 0; i < starCount; i++) {
-      const star = document.createElement('div');
-      star.style.position = 'absolute';
-      star.style.backgroundColor = 'white';
-      star.style.borderRadius = '50%';
+    let animationFrameId: number;
+    let stars: any[] = [];
+    let comets: any[] = [];
+    let mouse = { x: -1000, y: -1000 };
 
-      // Random position
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.top = `${Math.random() * 100}%`;
-
-      // Random size
-      const size = Math.random() * 3 + 0.5;
-      star.style.width = `${size}px`;
-      star.style.height = `${size}px`;
-
-      // Random opacity
-      star.style.opacity = `${Math.random() * 0.7 + 0.3}`;
-
-      // Add twinkle animation
-      star.style.animation = `twinkle ${2 + Math.random() * 3}s ease-in-out infinite`;
-
-      starsContainer.appendChild(star);
-      stars.push(star);
-    }
-
-    // Create comets if enabled
-    const comets: HTMLDivElement[] = [];
-    if (enableComets) {
-      for (let i = 0; i < Math.max(2, starCount / 20); i++) {
-        const comet = document.createElement('div');
-        comet.style.position = 'fixed';
-        comet.style.pointerEvents = 'none';
-        comet.style.zIndex = '-1';
-        comet.style.borderRadius = '50%';
-        comet.style.backgroundColor = 'white';
-        comet.style.width = '2px';
-        comet.style.height = '2px';
-        // Start off-screen
-        comet.style.left = '-10px';
-        comet.style.top = '-10px';
-        comet.style.opacity = '0';
-        starsContainer.appendChild(comet);
-        comets.push(comet);
-      }
-    }
-
-    document.body.appendChild(starsContainer);
-
-    // Handle mouse movement for cursor interaction
-    if (enableCursorInteraction) {
-      const handleMouseMove = (e: MouseEvent) => {
-        setMousePosition({ x: e.clientX, y: e.clientY });
-      };
+    // Inicializar estrellas respetando la densidad responsiva
+    const initStars = () => {
+      stars = [];
+      const numStars = window.innerWidth > 1024 ? 100 : window.innerWidth > 768 ? 75 : 50;
       
-      mouseMoveRef.current = handleMouseMove;
-      window.addEventListener('mousemove', handleMouseMove);
-    }
-
-    // Animate comets based on mouse position
-    let lastCometTime = 0;
-    const animateComets = (timestamp: number) => {
-      if (enableComets && mousePosition && timestamp - lastCometTime > 100) {
-        // Create a comet effect towards mouse position
-        const cometIndex = Math.floor(Math.random() * comets.length);
-        const comet = comets[cometIndex];
-        
-        // Start from random edge
-        let startX = 0;
-        let startY = 0;
-        const side = Math.floor(Math.random() * 4);
-        const targetX = mousePosition.x;
-        const targetY = mousePosition.y;
-        
-        switch (side) {
-          case 0: // Top
-            startX = Math.random() * window.innerWidth;
-            startY = -10;
-            break;
-          case 1: // Right
-            startX = window.innerWidth + 10;
-            startY = Math.random() * window.innerHeight;
-            break;
-          case 2: // Bottom
-            startX = Math.random() * window.innerWidth;
-            startY = window.innerHeight + 10;
-            break;
-          case 3: // Left
-            startX = -10;
-            startY = Math.random() * window.innerHeight;
-            break;
-        }
-        
-        comet.style.left = `${startX}px`;
-        comet.style.top = `${startY}px`;
-        comet.style.opacity = '0.6';
-        comet.style.width = '4px';
-        comet.style.height = '4px';
-        
-        // Animate towards mouse
-        const dx = targetX - startX;
-        const dy = targetY - startY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const duration = Math.max(500, distance / 2); // px/ms
-        const startTime = timestamp;
-        
-        const animateComet = (currentTime: number) => {
-          const elapsed = currentTime - startTime;
-          const progress = Math.min(elapsed / duration, 1);
-          
-          if (progress >= 1) {
-            comet.style.opacity = '0';
-            return;
-          }
-          
-          const easeOut = 1 - Math.pow(1 - progress, 3);
-          const currentX = startX + dx * easeOut;
-          const currentY = startY + dy * easeOut;
-          const size = 4 * (1 - easeOut);
-          
-          comet.style.left = `${currentX}px`;
-          comet.style.top = `${currentY}px`;
-          comet.style.width = `${size}px`;
-          comet.style.height = `${size}px`;
-          comet.style.opacity = `${0.6 * (1 - easeOut)}`;
-          
-          requestAnimationFrame(animateComet);
-        };
-        
-        requestAnimationFrame(animateComet);
-        lastCometTime = timestamp;
-      }
-      
-      if (mousePosition) {
-        requestAnimationFrame(animateComets);
-      }
-    }
-
-    // Cleanup
-    return () => {
-      starsContainer.remove();
-      if (mouseMoveRef.current) {
-        window.removeEventListener('mousemove', mouseMoveRef.current);
+      for (let i = 0; i < numStars; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          baseX: Math.random() * canvas.width,
+          baseY: Math.random() * canvas.height,
+          size: Math.random() * 1.5 + 0.5,
+          opacity: Math.random(),
+          speed: (Math.random() * 0.02) + 0.005
+        });
       }
     };
-  }, [starCount, enableCursorInteraction, enableComets, className]);
 
-  return <div className="absolute inset-0" aria-hidden="true" />;
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initStars();
+    };
+
+    const animate = () => {
+      // Fondo: Pure black a deep space blue
+      ctx.fillStyle = '#000816';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // --- RENDERIZAR ESTRELLAS ---
+      stars.forEach(star => {
+        // Efecto titilante
+        star.opacity += star.speed;
+        if (star.opacity > 1 || star.opacity < 0.2) star.speed = -star.speed;
+
+        // Interacción con el cursor (Repeler / Wake effect)
+        const dx = mouse.x - star.x;
+        const dy = mouse.y - star.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const maxDistance = 120; // Radio de interacción
+
+        if (distance < maxDistance) {
+          const force = (maxDistance - distance) / maxDistance;
+          star.x -= (dx / distance) * force * 1.5;
+          star.y -= (dy / distance) * force * 1.5;
+        } else {
+          // Retornar suavemente a su posición original
+          star.x += (star.baseX - star.x) * 0.02;
+          star.y += (star.baseY - star.y) * 0.02;
+        }
+
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(248, 249, 250, ${Math.abs(star.opacity)})`;
+        ctx.fill();
+      });
+
+      // --- RENDERIZAR COMETAS ---
+      // 1% de probabilidad por frame, máximo 3 simultáneos
+      if (Math.random() < 0.01 && comets.length < 3) {
+        comets.push({
+          x: Math.random() * canvas.width * 1.5, // Pueden nacer más a la derecha
+          y: -50, // Nacen arriba fuera de la pantalla
+          length: Math.random() * 60 + 40,
+          speedX: Math.random() * 3 + 2,
+          speedY: Math.random() * 3 + 2,
+        });
+      }
+
+      for (let i = comets.length - 1; i >= 0; i--) {
+        const comet = comets[i];
+        
+        // El cometa viaja hacia abajo a la izquierda
+        comet.x -= comet.speedX;
+        comet.y += comet.speedY;
+
+        // Cálculo de la cola (opuesta al vector de velocidad)
+        const tailX = comet.x + (comet.speedX * comet.length * 0.3);
+        const tailY = comet.y - (comet.speedY * comet.length * 0.3);
+
+        const gradient = ctx.createLinearGradient(comet.x, comet.y, tailX, tailY);
+        gradient.addColorStop(0, 'rgba(255, 255, 255, 1)'); // Cabeza opaca
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)'); // Cola transparente
+
+        ctx.beginPath();
+        ctx.moveTo(comet.x, comet.y);
+        ctx.lineTo(tailX, tailY);
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 1.5;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+
+        // Eliminar si sale de los límites (Collision detection bounds)
+        if (comet.x < -100 || comet.y > canvas.height + 100) {
+          comets.splice(i, 1);
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+    
+    // Al salir de la pantalla, reiniciar cursor
+    window.addEventListener('mouseout', () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    });
+
+    resize();
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', () => {});
+      window.removeEventListener('mouseout', () => {});
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="fixed inset-0 z-[-1] pointer-events-none" />;
 }
