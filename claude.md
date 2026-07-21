@@ -1,10 +1,12 @@
 # Project: [Willyb0t] Portfolio
 
 ## Tech Stack
-- Framework: Next.js 14 with App Router
+- Framework: Next.js 16 with App Router
 - Styling: Tailwind CSS v3.4
-- Animations: Framer Motion
+- Animations: Framer Motion + canvas (requestAnimationFrame)
+- Package manager: pnpm
 - Deployment: Vercel
+- UI language: Spanish (all copy lives in src/data/)
 
 ## Design Rules
 
