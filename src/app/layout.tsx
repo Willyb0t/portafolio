@@ -1,16 +1,25 @@
 import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { Orbitron } from 'next/font/google';
-import MainLayout from '@/components/layout/MainLayout';
+import type { Metadata, Viewport } from 'next';
+import { Inter, Orbitron, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
+import CosmicBackground from '@/components/background/CosmicBackground';
+import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import MotionProvider from '@/components/ui/MotionProvider';
 
-const inter = Inter({ subsets: ['latin'] });
-const orbitron = Orbitron({ subsets: ['latin'], weight: ['400', '700'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
+const orbitron = Orbitron({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-orbitron', display: 'swap' });
+const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space-grotesk', display: 'swap' });
+const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains-mono', display: 'swap' });
 
 export const metadata: Metadata = {
-  title: 'Willyb0t Portfolio',
-  description: 'Portfolio of Willyb0t - Physics Enthusiast & Full-Stack Developer',
+  title: 'Willyb0t — Portafolio',
+  description: 'Portafolio de Willyb0t — Entusiasta de la física y desarrollador full-stack.',
+};
+
+export const viewport: Viewport = {
+  themeColor: '#000816',
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -19,10 +28,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.className}>
-      <body className={orbitron.className}>
-        <MainLayout>{children}</MainLayout>
-        <Footer />
+    <html
+      lang="es"
+      className={`${inter.variable} ${orbitron.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+    >
+      <body className="bg-space-black font-sans text-stellar-white antialiased">
+        <MotionProvider>
+          <a
+            href="#contenido"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-[100] focus:rounded-lg focus:bg-electric-blue focus:px-4 focus:py-2 focus:text-space-black"
+          >
+            Saltar al contenido
+          </a>
+          <CosmicBackground />
+          <Navbar />
+          <main id="contenido">{children}</main>
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

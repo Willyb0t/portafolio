@@ -1,47 +1,68 @@
 'use client';
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { navRoutes } from '@/data/navigation';
 
 export default function Navbar() {
   const pathname = usePathname();
 
-  const routes = [
-    { href: '/', label: 'Home' },
-    { href: '/about', label: 'About' },
-    { href: '/portfolio', label: 'Portfolio' },
-    { href: '/skills', label: 'Skills' },
-    { href: '/experience', label: 'Experience' },
-    { href: '/education', label: 'Education' },
-    { href: '/contact', label: 'Contact' },
-  ];
-
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-black/50 backdrop-blur-sm">
-      <div className="flex items-center space-x-4">
-        <Link href="/" className="text-xl font-bold">
-          Willyb0t
-        </Link>
-      </div>
-      <div className="hidden md:flex space-x-6">
-        {routes.map((route) => (
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-black/50 backdrop-blur-md">
+      <nav aria-label="Navegación principal" className="mx-auto max-w-6xl px-4 md:px-6">
+        <div className="flex items-center justify-between py-3">
           <Link
-            key={route.href}
-            href={route.href}
-            className={`text-sm font-medium text-stellar-white/70 hover:text-stellar-white transition-colors ${
-              pathname === route.href
-                ? 'border-b-2 border-electric-blue'
-                : 'border-b-2 border-transparent'
-            }`}
+            href="/"
+            className="font-display text-lg font-bold tracking-wider text-stellar-white transition-colors hover:text-electric-blue md:text-xl"
           >
-            {route.label}
+            <span aria-hidden="true" className="text-electric-blue">✦</span> Willyb0t
           </Link>
-        ))}
-      </div>
-      <div className="md:hidden">
-        <button className="text-xl" aria-label="Open menu">
-          {/* Hamburger icon - in a real implementation, this would open a mobile menu */}
-        </button>
-      </div>
-    </nav>
+
+          {/* Desktop links */}
+          <ul className="hidden items-center gap-6 md:flex">
+            {navRoutes.map((route) => {
+              const isActive = pathname === route.href;
+              return (
+                <li key={route.href}>
+                  <Link
+                    href={route.href}
+                    aria-current={isActive ? 'page' : undefined}
+                    className={`border-b-2 pb-1 text-sm font-medium transition-colors ${
+                      isActive
+                        ? 'border-electric-blue text-electric-blue'
+                        : 'border-transparent text-stellar-white/70 hover:text-stellar-white'
+                    }`}
+                  >
+                    {route.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        {/* Mobile: horizontally scrollable tab row (no hamburger) */}
+        <ul className="no-scrollbar -mx-1 flex gap-1 overflow-x-auto px-1 pb-1 md:hidden">
+          {navRoutes.map((route) => {
+            const isActive = pathname === route.href;
+            return (
+              <li key={route.href} className="shrink-0">
+                <Link
+                  href={route.href}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`flex min-h-[48px] items-center border-b-2 px-3 text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'border-electric-blue text-electric-blue'
+                      : 'border-transparent text-stellar-white/70 hover:text-stellar-white'
+                  }`}
+                >
+                  {route.label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </header>
   );
 }
