@@ -1,7 +1,14 @@
 "use client";
 import React, { useEffect, useRef } from 'react';
 
-export default function StarfieldBackground() {
+export interface StarfieldBackgroundProps {
+  starCount?: number;
+  enableCursorInteraction?: boolean;
+  enableComets?: boolean;
+  className?: string;
+}
+
+export default function StarfieldBackground({ className = '' }: StarfieldBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -11,9 +18,28 @@ export default function StarfieldBackground() {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let stars: any[] = [];
-    let comets: any[] = [];
-    let mouse = { x: -1000, y: -1000 };
+
+    interface Star {
+      x: number;
+      y: number;
+      baseX: number;
+      baseY: number;
+      size: number;
+      opacity: number;
+      speed: number;
+    }
+
+    interface Comet {
+      x: number;
+      y: number;
+      length: number;
+      speedX: number;
+      speedY: number;
+    }
+
+    let stars: Star[] = [];
+    const comets: Comet[] = [];
+    const mouse = { x: -1000, y: -1000 };
 
     // Inicializar estrellas respetando la densidad responsiva
     const initStars = () => {
@@ -139,5 +165,5 @@ export default function StarfieldBackground() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="fixed inset-0 z-[-1] pointer-events-none" />;
+  return <canvas ref={canvasRef} className={`fixed inset-0 z-[-1] pointer-events-none ${className}`} />;
 }

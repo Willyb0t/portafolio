@@ -1,8 +1,12 @@
 import React from 'react';
 
-export default function OrbitalSystem() {
+export interface OrbitalSystemProps {
+  className?: string;
+}
+
+export default function OrbitalSystem({ className = '' }: OrbitalSystemProps) {
   return (
-    <div className="relative flex items-center justify-center w-80 h-80 pointer-events-none opacity-60">
+    <div className={`relative flex items-center justify-center w-80 h-80 pointer-events-none opacity-60 ${className}`}>
       {/* Cuerpo Central (Planeta/Estrella) - Accent Blue */}
       <div className="absolute w-8 h-8 rounded-full bg-[#00b4d8] shadow-[0_0_24px_#00b4d8]"></div>
 

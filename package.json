@@ -7,11 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "format": "prettier --write \"**/*.{js,ts,jsx,tsx,css,md}\"",
-    "analyze": "ANALYZE=true next build"
+    "lint": "eslint"
   },
   "keywords": [
     "portfolio",
@@ -33,6 +29,7 @@
     "url": "git+https://github.com/willyb0t/portfolio.git"
   },
   "dependencies": {
+    "framer-motion": "^12.42.2",
     "next": "16.2.7",
     "react": "19.2.4",
     "react-dom": "19.2.4"
