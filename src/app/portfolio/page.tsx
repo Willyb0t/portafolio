@@ -1,15 +1,24 @@
-import ProjectFilters from '@/components/project/ProjectFilters';
-import ProjectGrid from '@/components/project/ProjectGrid';
+import type { Metadata } from 'next';
+import PortfolioClient from '@/components/project/PortfolioClient';
+import { Typography } from '@/components/ui/Typography';
+import Reveal from '@/components/ui/Reveal';
+import { portfolioContent } from '@/data/content';
 import { projects } from '@/data/projects';
+
+export const metadata: Metadata = {
+  title: 'Portafolio — Willyb0t',
+  description: 'Proyectos de Willyb0t: simulación cuántica, pipelines de datos, IoT y más.',
+};
 
 export default function PortfolioPage() {
   return (
     <div className="relative z-10 mx-auto max-w-6xl px-6 pb-16 pt-28 md:pt-24">
-      <h1 className="mb-8 text-center font-display text-3xl font-bold text-electric-blue md:text-4xl">
-        Portafolio
-      </h1>
-      <ProjectFilters projects={projects} />
-      <ProjectGrid projects={projects} />
+      <Reveal>
+        <Typography variant="h1" color="accent" align="center" className="mb-8">
+          {portfolioContent.title}
+        </Typography>
+      </Reveal>
+      <PortfolioClient projects={projects} />
     </div>
   );
 }

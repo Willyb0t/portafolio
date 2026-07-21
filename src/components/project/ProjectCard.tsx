@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { GlassmorphismCard } from '@/components/ui/GlassmorphismCard';
 import { Typography } from '@/components/ui/Typography';
+import { portfolioContent } from '@/data/content';
 import { Project } from '@/data/projects';
 
 interface ProjectCardProps {
@@ -9,62 +10,61 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <GlassmorphismCard className="h-full">
+    <GlassmorphismCard className="flex h-full flex-col p-5">
       {project.featured && (
-        <div className="absolute top-2 right-2 bg-vibrant-purple/20 text-vibrant-purple px-2 py-1 rounded text-xs">
-          FEATURED
-        </div>
+        <span className="absolute right-3 top-3 z-10 rounded bg-cosmic-pink/20 px-2 py-1 text-xs font-semibold text-cosmic-pink">
+          {portfolioContent.featured}
+        </span>
       )}
-      <div className="relative h-48 mb-4">
-        {/* In a real app, this would be an actual image */}
-        <div className="absolute inset-0 bg-gray-800/50 flex items-center justify-center">
-          <Typography variant="body2" color="secondary" align="center">
-            Image Preview
-          </Typography>
-        </div>
+
+      {/* Cosmic placeholder (real screenshots can replace this later) */}
+      <div
+        aria-hidden="true"
+        className="relative mb-4 h-36 overflow-hidden rounded-lg border border-white/[0.06] bg-gradient-to-br from-space-blue via-space-black to-vibrant-purple/30"
+      >
+        <span className="absolute inset-0 flex items-center justify-center font-display text-5xl font-bold text-white/[0.07]">
+          {project.title.charAt(0)}
+        </span>
+        <span className="absolute left-3 top-2 h-1 w-1 rounded-full bg-stellar-white/40" />
+        <span className="absolute bottom-3 left-1/3 h-0.5 w-0.5 rounded-full bg-stellar-white/30" />
+        <span className="absolute bottom-6 right-4 h-1.5 w-1.5 rounded-full bg-electric-blue/40" />
+        <span className="absolute right-3 top-3 text-electric-blue/50">✦</span>
       </div>
-      <Typography variant="h3" color="accent" align="left" className="mb-2">
+
+      <Typography variant="h2" className="mb-2">
         {project.title}
       </Typography>
-      <Typography variant="body2" color="white" align="left" className="mb-3">
+      <Typography variant="body1" color="secondary" className="mb-4 flex-1">
         {project.description}
       </Typography>
-      <div className="flex flex-wrap gap-2 mb-4">
+
+      <ul className="mb-4 flex flex-wrap gap-2" aria-label="Tecnologías">
         {project.technologies.map((tech) => (
-          <span key={tech} className="bg-gray-700/30 text-xs px-2 py-1 rounded">
+          <li key={tech} className="rounded bg-white/5 px-2 py-1 text-xs text-stellar-white/80">
             {tech}
-          </span>
+          </li>
         ))}
-      </div>
-      <div className="flex justify-between items-center">
-        <div className="flex space-x-2">
-          {project.githubUrl && (
-            <Link
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-electric-blue hover:underline"
-            >
-              GitHub
-            </Link>
-          )}
-          {project.liveUrl && (
-            <Link
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-electric-blue hover:underline"
-            >
-              Live Demo
-            </Link>
-          )}
-        </div>
+      </ul>
+
+      <div className="flex gap-4">
+        {project.githubUrl && (
+          <Link
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-electric-blue transition-colors hover:text-stellar-white"
+          >
+            {portfolioContent.github}
+          </Link>
+        )}
         {project.liveUrl && (
           <Link
             href={project.liveUrl}
-            className="ml-4 text-sm text-electric-blue hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-electric-blue transition-colors hover:text-stellar-white"
           >
-            View Project
+            {portfolioContent.liveDemo}
           </Link>
         )}
       </div>

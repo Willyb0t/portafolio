@@ -1,31 +1,21 @@
-'use client';
-
-import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
-import { Project } from '@/data/projects';
 
 interface ProjectFiltersProps {
-  projects: Project[];
+  filters: string[];
+  selected: string;
+  onSelect: (filter: string) => void;
 }
 
-export default function ProjectFilters({ projects }: ProjectFiltersProps) {
-  const [selectedFilter, setSelectedFilter] = useState<string>('All');
-
-  // Extract unique technologies
-  const allTechnologies = Array.from(
-    new Set(projects.flatMap(p => p.technologies))
-  ).sort();
-
-  const filters = ['All', ...allTechnologies];
-
+export default function ProjectFilters({ filters, selected, onSelect }: ProjectFiltersProps) {
   return (
-    <div className="mb-8 flex flex-wrap gap-2 justify-center">
+    <div className="mb-8 flex flex-wrap justify-center gap-2" role="group" aria-label="Filtrar proyectos por tecnología">
       {filters.map((filter) => (
         <Button
           key={filter}
-          variant={selectedFilter === filter ? 'primary' : 'outline'}
+          variant={selected === filter ? 'primary' : 'outline'}
           size="sm"
-          onClick={() => setSelectedFilter(filter)}
+          onClick={() => onSelect(filter)}
+          aria-pressed={selected === filter}
         >
           {filter}
         </Button>

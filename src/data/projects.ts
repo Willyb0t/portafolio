@@ -2,7 +2,7 @@ export interface Project {
   id: string;
   title: string;
   description: string;
-  image: string; // URL or path
+  image: string;
   technologies: string[];
   githubUrl?: string;
   liveUrl?: string;
@@ -13,7 +13,8 @@ export const projects: Project[] = [
   {
     id: 'voc-from-social-media',
     title: 'VOC Analysis from Social Media',
-    description: 'A natural language processing system that analyzes volatile organic compound (VOC) emissions data extracted from social media posts to identify environmental trends and pollution sources in real-time.',
+    description:
+      'Sistema de procesamiento de lenguaje natural que analiza datos de emisiones de compuestos orgánicos volátiles (VOC) extraídos de publicaciones en redes sociales para identificar tendencias ambientales y fuentes de contaminación en tiempo real.',
     image: '/images/voc-social-media.jpg',
     technologies: ['Python', 'NLTK', 'Pandas', 'Scikit-learn', 'React', 'Chart.js', 'API Integration'],
     githubUrl: 'https://github.com/Willyb0t/voc_from_social_media',
@@ -23,7 +24,8 @@ export const projects: Project[] = [
   {
     id: 'qkd-simulation',
     title: 'Quantum Key Distribution Simulation',
-    description: 'An interactive quantum mechanics simulation that demonstrates the principles of Quantum Key Distribution (QKD) protocols including BB84 and E91, with visualizations of quantum states, entanglement, and secure key generation.',
+    description:
+      'Simulación interactiva de mecánica cuántica que demuestra los principios de los protocolos de distribución cuántica de claves (QKD), incluidos BB84 y E91, con visualizaciones de estados cuánticos, entrelazamiento y generación segura de claves.',
     image: '/images/qkd-simulation.jpg',
     technologies: ['React', 'Three.js', 'TypeScript', 'CSS3', 'WebGL', 'Quantum Computing Concepts'],
     githubUrl: 'https://github.com/Willyb0t/qkd_simulation',
@@ -33,7 +35,8 @@ export const projects: Project[] = [
   {
     id: 'telegraph-trough-internet',
     title: 'Telegraph Protocol Over Internet',
-    description: 'A modern implementation of telegraph communication protocols adapted for internet transmission, combining historical communication methods with contemporary networking technology to create a resilient, low-bandwidth messaging system.',
+    description:
+      'Implementación moderna de protocolos de comunicación telegráfica adaptados a la transmisión por internet, que combina métodos históricos de comunicación con tecnología de redes contemporánea para crear un sistema de mensajería resiliente de bajo ancho de banda.',
     image: '/images/telegraph-internet.jpg',
     technologies: ['Node.js', 'Socket.io', 'Python', 'Serial Communication', 'TCP/IP Protocols', 'React'],
     githubUrl: 'https://github.com/Willyb0t/telegraph_trough_internet',
@@ -43,7 +46,8 @@ export const projects: Project[] = [
   {
     id: 'lora-tracker',
     title: 'LoRaWAN Asset Tracking System',
-    description: 'A long-range, low-power wireless tracking system using LoRaWAN technology for monitoring assets in remote or challenging environments, featuring real-time location tracking, geofencing, and energy-efficient operation.',
+    description:
+      'Sistema de rastreo de activos inalámbrico de largo alcance y bajo consumo que utiliza tecnología LoRaWAN para monitorear activos en entornos remotos o difíciles, con seguimiento de ubicación en tiempo real, geocercas y operación energéticamente eficiente.',
     image: '/images/lora-tracker.jpg',
     technologies: ['C/C++', 'Python', 'LoRaWAN', 'MQTT', 'PostgreSQL', 'React Native', 'AWS IoT'],
     githubUrl: 'https://github.com/Willyb0t/LORA-tracker',
@@ -53,11 +57,12 @@ export const projects: Project[] = [
   {
     id: 'elt-sap-b1-pipeline',
     title: 'ELT Pipeline for SAP B1 Data',
-    description: 'An enterprise-grade ELT (Extract, Load, Transform) pipeline that extracts data from SAP Business One, processes it using dbt for transformation, and loads it into a PostgreSQL data warehouse for visualization in Power BI, enabling comprehensive business intelligence.',
+    description:
+      'Pipeline ELT (Extract, Load, Transform) de nivel empresarial que extrae datos de SAP Business One, los procesa con dbt y los carga en un almacén de datos PostgreSQL para su visualización en Power BI, habilitando inteligencia de negocio integral.',
     image: '/images/elt-sap-b1.jpg',
     technologies: ['Python', 'Apache Airflow', 'dbt', 'PostgreSQL', 'Power BI', 'SAP B1 API', 'Docker', 'SQL'],
     githubUrl: 'https://github.com/Willyb0t/elt-sap-b1-pipeline',
     liveUrl: 'https://elt-sap-b1.willyb0t.dev',
     featured: true,
-  }
+  },
 ];
