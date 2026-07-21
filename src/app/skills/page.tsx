@@ -1,18 +1,15 @@
-import MainLayout from '@/components/layout/MainLayout';
-import StarfieldBackground from '@/components/background/StarfieldBackground';
 import SkillsDetail from '@/components/skills/SkillsDetail';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Habilidades — Willyb0t',
+  description: 'Tecnologías y habilidades técnicas de Willyb0t según su experiencia en proyectos.',
+};
 
 export default function SkillsPage() {
   return (
-    <MainLayout>
-      <StarfieldBackground
-        starCount={60}
-        enableCursorInteraction={false}
-        enableComets={false}
-      />
-      <section className="relative z-10 pt-20 pb-16">
-        <SkillsDetail />
-      </section>
-    </MainLayout>
+    <div className="relative z-10 mx-auto max-w-4xl px-6 pb-16 pt-28 md:pt-24">
+      <SkillsDetail />
+    </div>
   );
 }

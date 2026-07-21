@@ -1,60 +1,47 @@
 import { GlassmorphismCard } from '@/components/ui/GlassmorphismCard';
 import { Typography } from '@/components/ui/Typography';
+import Reveal from '@/components/ui/Reveal';
+import { educationEntries, educationPageContent } from '@/data/content';
 
 export default function EducationSection() {
   return (
-    <section className="mx-auto max-w-4xl px-6">
-      <Typography variant="h2" color="accent" align="center" className="mb-8">
-        Education
-      </Typography>
-      <GlassmorphismCard>
-        <Typography variant="body1" color="white" align="left" className="space-y-4">
-          <div className="flex items-start space-x-4">
-            <Typography variant="h3" color="accent" align="left" className="w-20">
-              2015-2019
-            </Typography>
-            <div>
-              <Typography variant="h3" color="white" align="left">
-                Bachelor of Science in Physics
-              </Typography>
-              <Typography variant="body2" color="secondary" align="left">
-                University of Science and Technology
-              </Typography>
-              <Typography variant="body1" color="white" align="left" className="mt-1">
-                Relevant coursework: Classical Mechanics, Electromagnetism, Quantum Mechanics, Thermodynamics, Mathematical Physics, Computer Programming for Scientists
-              </Typography>
-              <Typography variant="body2" color="white" align="left" className="mt-2">
-                Thesis:
-              </Typography>
-              <Typography variant="body1" color="white" align="left" className="ml-4">
-                &quot;Applications of Quantum Computing in Cryptographic Systems&quot;
-              </Typography>
-            </div>
-          </div>
-          <div className="flex items-start space-x-4">
-            <Typography variant="h3" color="accent" align="left" className="w-20">
-              2019-2021
-            </Typography>
-            <div>
-              <Typography variant="h3" color="white" align="left">
-                Master of Science in Computer Science
-              </Typography>
-              <Typography variant="body2" color="secondary" align="left">
-                University of Science and Technology
-              </Typography>
-              <Typography variant="body1" color="white" align="left" className="mt-1">
-                Relevant coursework: Advanced Algorithms, Machine Learning, Computer Graphics, Human-Computer Interaction, Software Engineering Principles
-              </Typography>
-              <Typography variant="body2" color="white" align="left" className="mt-2">
-                Thesis:
-              </Typography>
-              <Typography variant="body1" color="white" align="left" className="ml-4">
-                &quot;Interactive Visualization Techniques for Complex Scientific Data&quot;
-              </Typography>
-            </div>
-          </div>
+    <section aria-labelledby="education-title" className="mx-auto max-w-4xl">
+      <Reveal>
+        <Typography variant="h1" color="accent" align="center" className="mb-12" id="education-title">
+          {educationPageContent.title}
         </Typography>
-      </GlassmorphismCard>
+      </Reveal>
+      <div className="space-y-6">
+        {educationEntries.map((entry, index) => (
+          <Reveal key={entry.degree} delay={index * 0.1}>
+            <GlassmorphismCard className="p-6 md:p-8">
+              <div className="grid gap-2 sm:grid-cols-[10rem_1fr] sm:gap-6">
+                <Typography variant="body1" color="accent" className="font-semibold">
+                  {entry.period}
+                </Typography>
+                <div>
+                  <Typography variant="h2">{entry.degree}</Typography>
+                  <Typography variant="body1" color="secondary">
+                    {entry.institution}
+                  </Typography>
+                  <Typography variant="body1" className="mt-3 font-semibold">
+                    {educationPageContent.courseworkLabel}
+                  </Typography>
+                  <Typography variant="body1" className="text-stellar-white/85">
+                    {entry.coursework}
+                  </Typography>
+                  <Typography variant="body1" className="mt-3 font-semibold">
+                    {educationPageContent.thesisLabel}
+                  </Typography>
+                  <Typography variant="body1" className="text-stellar-white/85">
+                    {entry.thesis}
+                  </Typography>
+                </div>
+              </div>
+            </GlassmorphismCard>
+          </Reveal>
+        ))}
+      </div>
     </section>
   );
 }

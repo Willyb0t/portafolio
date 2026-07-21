@@ -1,18 +1,15 @@
-import MainLayout from '@/components/layout/MainLayout';
-import StarfieldBackground from '@/components/background/StarfieldBackground';
+import type { Metadata } from 'next';
 import ContactForm from '@/components/contact/ContactForm';
+
+export const metadata: Metadata = {
+  title: 'Contacto — Willyb0t',
+  description: 'Ponte en contacto con Willyb0t para proyectos y colaboraciones.',
+};
 
 export default function ContactPage() {
   return (
-    <MainLayout>
-      <StarfieldBackground
-        starCount={60}
-        enableCursorInteraction={false}
-        enableComets={false}
-      />
-      <section className="relative z-10 pt-20 pb-16">
-        <ContactForm />
-      </section>
-    </MainLayout>
+    <div className="relative z-10 mx-auto max-w-4xl px-6 pb-16 pt-28 md:pt-24">
+      <ContactForm />
+    </div>
   );
 }

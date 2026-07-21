@@ -1,21 +1,18 @@
-import { FC, ReactNode } from 'react';
-import styles from './GlassmorphismCard.module.css';
+import { ReactNode } from 'react';
 
-interface GlassmorphismCardProps {
+export interface GlassmorphismCardProps {
   children: ReactNode;
   className?: string;
-  title?: string;
 }
 
-export const GlassmorphismCard: FC<GlassmorphismCardProps> = ({
-  children,
-  className = '',
-  title,
-}) => {
+export function GlassmorphismCard({ children, className = '' }: GlassmorphismCardProps) {
   return (
-    <div className={styles['glassmorphism-card'] + ' ' + (className || '')}>
-      {title && <h3 className={styles['card-title'] + ''}>{title}</h3>}
-      <div className={styles['card-content'] + ''}>{children}</div>
+    <div
+      className={`relative overflow-hidden rounded-2xl border border-white/[0.08] bg-black/20 backdrop-blur-[12px] transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-black/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)] ${className}`}
+    >
+      {children}
     </div>
   );
-};
+}
+
+export default GlassmorphismCard;

@@ -1,27 +1,24 @@
-import MainLayout from '@/components/layout/MainLayout';
-import StarfieldBackground from '@/components/background/StarfieldBackground';
-import ProjectFilters from '@/components/project/ProjectFilters';
-import ProjectGrid from '@/components/project/ProjectGrid';
+import type { Metadata } from 'next';
+import PortfolioClient from '@/components/project/PortfolioClient';
 import { Typography } from '@/components/ui/Typography';
+import Reveal from '@/components/ui/Reveal';
+import { portfolioContent } from '@/data/content';
 import { projects } from '@/data/projects';
+
+export const metadata: Metadata = {
+  title: 'Portafolio — Willyb0t',
+  description: 'Proyectos de Willyb0t: simulación cuántica, pipelines de datos, IoT y más.',
+};
 
 export default function PortfolioPage() {
   return (
-    <MainLayout>
-      <StarfieldBackground
-        starCount={70}
-        enableCursorInteraction={true}
-        enableComets={false}
-      />
-      <section className="relative z-10 pt-20 pb-16">
-        <div className="mx-auto max-w-6xl px-6">
-          <Typography variant="h2" color="accent" align="center" className="mb-8">
-            Portfolio
-          </Typography>
-          <ProjectFilters projects={projects} />
-          <ProjectGrid projects={projects} />
-        </div>
-      </section>
-    </MainLayout>
+    <div className="relative z-10 mx-auto max-w-6xl px-6 pb-16 pt-28 md:pt-24">
+      <Reveal>
+        <Typography variant="h1" color="accent" align="center" className="mb-8">
+          {portfolioContent.title}
+        </Typography>
+      </Reveal>
+      <PortfolioClient projects={projects} />
+    </div>
   );
 }

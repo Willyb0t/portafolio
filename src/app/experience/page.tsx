@@ -1,18 +1,15 @@
-import MainLayout from '@/components/layout/MainLayout';
-import StarfieldBackground from '@/components/background/StarfieldBackground';
+import type { Metadata } from 'next';
 import ExperienceTimeline from '@/components/experience/ExperienceTimeline';
+
+export const metadata: Metadata = {
+  title: 'Experiencia — Willyb0t',
+  description: 'Trayectoria profesional de Willyb0t como desarrollador.',
+};
 
 export default function ExperiencePage() {
   return (
-    <MainLayout>
-      <StarfieldBackground
-        starCount={60}
-        enableCursorInteraction={false}
-        enableComets={false}
-      />
-      <section className="relative z-10 pt-20 pb-16">
-        <ExperienceTimeline />
-      </section>
-    </MainLayout>
+    <div className="relative z-10 mx-auto max-w-4xl px-6 pb-16 pt-28 md:pt-24">
+      <ExperienceTimeline />
+    </div>
   );
 }

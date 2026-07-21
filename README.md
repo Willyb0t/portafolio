@@ -1,6 +1,6 @@
 # Willyb0t Portfolio
 
-A modern, interactive portfolio website built with Next.js 14, TypeScript, and Tailwind CSS. Features an immersive space/observatory theme with interactive starfield, orbital systems, and smooth animations.
+A modern, interactive portfolio website built with Next.js 16, TypeScript, and Tailwind CSS. Features an immersive space/observatory theme with interactive starfield, orbital systems, and smooth animations. UI in Spanish.
 
 ## Features
 
@@ -13,23 +13,23 @@ A modern, interactive portfolio website built with Next.js 14, TypeScript, and T
 
 ## Tech Stack
 
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion, CSS animations
-- **Icons**: React Icons
-- **Fonts**: Google Fonts (Orbitron, Inter, Space Grotesk)
+- **Framework**: Next.js 16 (App Router, Turbopack)
+- **Language**: TypeScript (strict)
+- **Styling**: Tailwind CSS v3.4
+- **Animations**: Framer Motion, CSS animations, canvas (requestAnimationFrame)
+- **Package manager**: pnpm
+- **Fonts**: Google Fonts via next/font (Orbitron, Inter, Space Grotesk, JetBrains Mono)
 
 ## Getting Started
 
 1. Install dependencies:
    ```bash
-   npm install
+   pnpm install
    ```
 
 2. Run development server:
    ```bash
-   npm run dev
+   pnpm dev
    ```
 
 3. Open [http://localhost:3000](http://localhost:3000) to view the site
@@ -37,8 +37,8 @@ A modern, interactive portfolio website built with Next.js 14, TypeScript, and T
 ## Building for Production
 
 ```bash
-npm run build
-npm start
+pnpm build
+pnpm start
 ```
 
 ## Deployment
@@ -64,7 +64,7 @@ vercel
 For other hosting platforms, you can build the project and serve the static output:
 
 ```bash
-npm run build
+pnpm build
 # The output will be in the .next directory
 # You can serve this with any static file server
 ```

@@ -1,142 +1,93 @@
-'use client';
+export interface OrbitalRing {
+  scale: number;
+  duration: number;
+  reverse?: boolean;
+  tiltX?: number;
+  rotation?: number;
+  satelliteColor: string;
+  satelliteSize: number;
+}
 
-import { useEffect } from 'react';
+export interface OrbitalSystemProps {
+  size?: number;
+  coreColor?: string;
+  coreSize?: number;
+  rings?: OrbitalRing[];
+  className?: string;
+}
+
+const defaultRings: OrbitalRing[] = [
+  { scale: 1, duration: 15, tiltX: 70, rotation: -12, satelliteColor: '#0077b6', satelliteSize: 12 },
+  { scale: 1.4, duration: 25, reverse: true, tiltX: 75, rotation: 45, satelliteColor: '#ff006e', satelliteSize: 8 },
+  { scale: 0.7, duration: 8, tiltX: 65, rotation: 90, satelliteColor: '#f8f9fa', satelliteSize: 6 },
+];
 
 export default function OrbitalSystem({
-  id,
-  centerX = 50,
-  centerY = 50,
-  radiusX = 120,
-  radiusY = 80,
-  speed = 0.03,
-  planetColor = '#4a90e2',
-  planetSize = 16,
-  trailLength = 8,
+  size = 320,
+  coreColor = '#00b4d8',
+  coreSize = 32,
+  rings = defaultRings,
   className = '',
-}: {
-  id?: string;
-  centerX?: number;
-  centerY?: number;
-  radiusX?: number;
-  radiusY?: number;
-  speed?: number;
-  planetColor?: string;
-  planetSize?: number;
-  trailLength?: number;
-  className?: string;
-}) {
-  useEffect(() => {
-    // Create a simple orbital system visualization
-    const container = document.createElement('div');
-    container.style.position = 'fixed';
-    container.style.top = '0';
-    container.style.left = '0';
-    container.style.width = '100%';
-    container.style.height = '100%';
-    container.style.pointerEvents = 'none';
-    container.style.zIndex = '-1';
-    if (id) container.id = id;
-    container.className = className;
+}: OrbitalSystemProps) {
+  return (
+    <div
+      className={`pointer-events-none relative flex items-center justify-center ${className}`}
+      style={{ width: size, height: size, perspective: 800 }}
+      aria-hidden="true"
+    >
+      {/* Central glowing body */}
+      <div
+        className="absolute rounded-full"
+        style={{
+          width: coreSize,
+          height: coreSize,
+          backgroundColor: coreColor,
+          boxShadow: `0 0 24px ${coreColor}`,
+          animation: 'pulse-slow 4s ease-in-out infinite',
+        }}
+      />
 
-    // Set container position (center of orbit)
-    container.style.left = `${centerX}%`;
-    container.style.top = `${centerY}%`;
-
-    // Create orbit path (ellipse)
-    const path = document.createElement('div');
-    path.style.position = 'absolute';
-    path.style.border = `1px solid ${planetColor}`;
-    path.style.borderRadius = '50%';
-    path.style.width = `${radiusX * 2}px`;
-    path.style.height = `${radiusY * 2}px`;
-    path.style.opacity = '0.4';
-    path.style.left = `-${radiusX}px`;
-    path.style.top = `-${radiusY}px`;
-    path.style.boxShadow = `0 0 15px rgba(74, 144, 226, 0.3)`;
-
-    // Create planet (enhanced visualization)
-    const planet = document.createElement('div');
-    planet.style.position = 'absolute';
-    planet.style.width = `${planetSize}px`;
-    planet.style.height = `${planetSize}px`;
-    planet.style.backgroundColor = planetColor;
-    planet.style.borderRadius = '50%';
-    planet.style.boxShadow = `
-      0 0 10px rgba(74, 144, 226, 0.5),
-      0 0 20px rgba(74, 144, 226, 0.3),
-      inset 0 0 5px rgba(255, 255, 255, 0.3)
-    `;
-    planet.style.left = `calc(50% - ${planetSize / 2}px)`;
-    planet.style.top = `calc(50% - ${planetSize / 2}px)`;
-
-    // Create trail points
-    const trailPoints: HTMLDivElement[] = [];
-    for (let i = 0; i < trailLength; i++) {
-      const trailPoint = document.createElement('div');
-      trailPoint.style.position = 'absolute';
-      const size = planetSize * 0.5 * (1 - i / trailLength);
-      trailPoint.style.width = `${size}px`;
-      trailPoint.style.height = `${size}px`;
-      trailPoint.style.backgroundColor = planetColor;
-      trailPoint.style.borderRadius = '50%';
-      trailPoint.style.opacity = `${0.4 * (1 - i / trailLength)}`;
-      trailPoint.style.boxShadow = `0 0 5px rgba(74, 144, 226, 0.3)`;
-      trailPoints.push(trailPoint);
-    }
-
-    // Assemble
-    path.appendChild(planet);
-    trailPoints.forEach((tp) => path.appendChild(tp));
-    container.appendChild(path);
-
-    document.body.appendChild(container);
-
-    // Animation loop
-    let angle = Math.random() * Math.PI * 2;
-    const animate = () => {
-      angle += speed;
-
-      // Calculate planet position
-      const planetX = Math.cos(angle) * radiusX;
-      const planetY = Math.sin(angle) * radiusY;
-
-      // Update planet position
-      planet.style.left = `calc(50% + ${planetX}px)`;
-      planet.style.top = `calc(50% + ${planetY}px)`;
-
-      // Update trail points
-      trailPoints.forEach((trailPoint, index) => {
-        const trailAngle = angle - (index + 1) * 0.1;
-        const trailRadius = radiusX * (1 - index / trailLength * 0.3);
-        const trailX = Math.cos(trailAngle) * trailRadius;
-        const trailY = Math.sin(trailAngle) * trailRadius * (radiusY / radiusX);
-
-        trailPoint.style.left = `calc(50% + ${trailX}px)`;
-        trailPoint.style.top = `calc(50% + ${trailY}px)`;
-        trailPoint.style.opacity = `${0.4 * (1 - index / trailLength)}`;
-      });
-
-      requestAnimationFrame(animate);
-    };
-
-    requestAnimationFrame(animate);
-
-    // Cleanup
-    return () => {
-      container.remove();
-    };
-  }, [
-    id,
-    centerX,
-    centerY,
-    radiusX,
-    radiusY,
-    speed,
-    planetColor,
-    planetSize,
-    trailLength,
-    className,
-  ]);
-
-  return null; // Render nothing, elements managed in useEffect
+      {rings.map((ring, index) => {
+        const ringSize = size * ring.scale;
+        return (
+          <div
+            key={index}
+            className="absolute"
+            style={{
+              width: ringSize,
+              height: ringSize,
+              transform: `rotate(${ring.rotation ?? 0}deg)`,
+            }}
+          >
+            {/* rotateX lives on the PARENT so the child's spin animation
+                does not override it — this is what makes the orbit elliptical */}
+            <div
+              className="h-full w-full"
+              style={{ transform: `rotateX(${ring.tiltX ?? 70}deg)`, transformStyle: 'preserve-3d' }}
+            >
+              <div
+                className="relative h-full w-full rounded-full border border-white/10"
+                style={{
+                  animation: `orbit-spin ${ring.duration}s linear infinite${ring.reverse ? ' reverse' : ''}`,
+                }}
+              >
+                {/* Satellite pinned to the ring edge */}
+                <div
+                  className="absolute left-1/2 top-0 rounded-full"
+                  style={{
+                    width: ring.satelliteSize,
+                    height: ring.satelliteSize,
+                    marginLeft: -ring.satelliteSize / 2,
+                    marginTop: -ring.satelliteSize / 2,
+                    backgroundColor: ring.satelliteColor,
+                    boxShadow: `0 0 ${ring.satelliteSize}px ${ring.satelliteColor}`,
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
 }

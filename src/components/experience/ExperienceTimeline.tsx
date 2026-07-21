@@ -1,85 +1,71 @@
 import { GlassmorphismCard } from '@/components/ui/GlassmorphismCard';
 import { Typography } from '@/components/ui/Typography';
+import Reveal from '@/components/ui/Reveal';
+import { experienceEntries, experiencePageContent } from '@/data/content';
 
 export default function ExperienceTimeline() {
   return (
-    <section className="mx-auto max-w-4xl px-6">
-      <Typography variant="h2" color="accent" align="center" className="mb-8">
-        Experience Timeline
-      </Typography>
-      <GlassmorphismCard>
-        <div className="space-y-6">
-          {/* Experience items would be similar to AboutPage experience section */}
-          <div className="flex items-start space-x-4">
-            <Typography variant="h3" color="accent" align="left" className="w-20">
-              2023-Present
-            </Typography>
-            <div>
-              <Typography variant="h3" color="white" align="left">
-                Senior Frontend Developer
-              </Typography>
-              <Typography variant="body2" color="secondary" align="left">
-                Tech Innovations Inc.
-              </Typography>
-              <Typography variant="body1" color="white" align="left" className="mt-1">
-                Led development of interactive data visualization platform used by research institutions worldwide.
-              </Typography>
-              <Typography variant="body2" color="white" align="left" className="mt-2">
-                Key achievements:
-              </Typography>
-              <ul className="list-disc list-inside space-y-1 mt-1 text-sm">
-                <li>Reduced load times by 65% through code splitting and lazy loading</li>
-                <li>Implemented real-time collaboration features using WebSockets</li>
-                <li>Mentored 3 junior developers in React and TypeScript best practices</li>
-              </ul>
-            </div>
-          </div>
-          <div className="flex items-start space-x-4">
-            <Typography variant="h3" color="accent" align="left" className="w-20">
-              2021-2023
-            </Typography>
-            <div>
-              <Typography variant="h3" color="white" align="left">
-                Full-Stack Developer
-              </Typography>
-              <Typography variant="body2" color="secondary" align="left">
-                Science Labs LLC
-              </Typography>
-              <Typography variant="body1" color="white" align="left" className="mt-1">
-                Built web applications for scientific research, including real-time particle simulation tools.
-              </Typography>
-              <Typography variant="body2" color="white" align="left" className="mt-2">
-                Technologies used:
-              </Typography>
-              <Typography variant="body2" color="white" align="left" className="ml-4">
-                • React • Node.js • PostgreSQL • Docker • AWS
-              </Typography>
-            </div>
-          </div>
-          <div className="flex items-start space-x-4">
-            <Typography variant="h3" color="accent" align="left" className="w-20">
-              2019-2021
-            </Typography>
-            <div>
-              <Typography variant="h3" color="white" align="left">
-                Junior Developer
-              </Typography>
-              <Typography variant="body2" color="secondary" align="left">
-                Web Solutions Agency
-              </Typography>
-              <Typography variant="body1" color="white" align="left" className="mt-1">
-                Developed responsive websites and web applications for various clients in education and nonprofit sectors.
-              </Typography>
-              <Typography variant="body2" color="white" align="left" className="mt-2">
-                Technologies used:
-              </Typography>
-              <Typography variant="body2" color="white" align="left" className="ml-4">
-                • HTML5 • CSS3 • JavaScript • PHP • WordPress
-              </Typography>
-            </div>
-          </div>
-        </div>
-      </GlassmorphismCard>
+    <section aria-labelledby="experience-title" className="mx-auto max-w-4xl">
+      <Reveal>
+        <Typography variant="h1" color="accent" align="center" className="mb-12" id="experience-title">
+          {experiencePageContent.title}
+        </Typography>
+      </Reveal>
+      <ol className="relative space-y-10 border-l-2 border-white/10 pl-8">
+        {experienceEntries.map((entry, index) => (
+          <li key={entry.period} className="relative">
+            <span
+              aria-hidden="true"
+              className="absolute -left-[41px] top-1.5 h-4 w-4 rounded-full border-2 border-electric-blue bg-space-black shadow-[0_0_12px_#00b4d8]"
+            />
+            <Reveal delay={index * 0.1}>
+              <GlassmorphismCard className="p-6">
+                <Typography variant="body1" color="accent" className="font-semibold">
+                  {entry.period}
+                </Typography>
+                <Typography variant="h2" className="mt-1">
+                  {entry.role}
+                </Typography>
+                <Typography variant="body1" color="secondary">
+                  {entry.company}
+                </Typography>
+                <Typography variant="body1" className="mt-3 text-stellar-white/85">
+                  {entry.summary}
+                </Typography>
+                {entry.achievements && (
+                  <>
+                    <Typography variant="body1" className="mt-4 font-semibold">
+                      {experiencePageContent.achievementsLabel}
+                    </Typography>
+                    <ul className="mt-2 list-disc space-y-1 pl-5 text-base text-stellar-white/85">
+                      {entry.achievements.map((achievement) => (
+                        <li key={achievement}>{achievement}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+                {entry.technologies && (
+                  <>
+                    <Typography variant="body1" className="mt-4 font-semibold">
+                      {experiencePageContent.technologiesLabel}
+                    </Typography>
+                    <ul className="mt-2 flex flex-wrap gap-2">
+                      {entry.technologies.map((tech) => (
+                        <li
+                          key={tech}
+                          className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-stellar-white/85"
+                        >
+                          {tech}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+              </GlassmorphismCard>
+            </Reveal>
+          </li>
+        ))}
+      </ol>
     </section>
   );
 }
