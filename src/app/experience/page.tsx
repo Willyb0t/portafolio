@@ -1,4 +1,10 @@
+import type { Metadata } from 'next';
 import ExperienceTimeline from '@/components/experience/ExperienceTimeline';
+
+export const metadata: Metadata = {
+  title: 'Experiencia — Willyb0t',
+  description: 'Trayectoria profesional de Willyb0t como desarrollador.',
+};
 
 export default function ExperiencePage() {
   return (
