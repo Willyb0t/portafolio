@@ -1,28 +1,25 @@
 import { GlassmorphismCard } from '@/components/ui/GlassmorphismCard';
 import { Typography } from '@/components/ui/Typography';
+import Reveal from '@/components/ui/Reveal';
+import { bio } from '@/data/content';
 
 export default function BioSection() {
   return (
-    <section className="mx-auto max-w-4xl px-6 mb-16">
-      <Typography variant="h2" color="accent" align="center" className="mb-8">
-        About Me
-      </Typography>
-      <GlassmorphismCard className="mb-8">
-        <Typography variant="body1" color="white" align="left" className="space-y-4">
-          <p>
-            Passionate about the intersection of physics and technology, I specialize in creating
-            interactive experiences that make complex concepts accessible and engaging.
-          </p>
-          <p>
-            My background in physics gives me a unique perspective on problem-solving, allowing me
-            to approach software development with analytical thinking and creative intuition.
-          </p>
-          <p>
-            When I am not coding, you can find me exploring astronomical phenomena, reading about
-            quantum mechanics, or experimenting with new ways to visualize scientific concepts.
-          </p>
+    <section aria-labelledby="bio-title" className="mb-16">
+      <Reveal>
+        <Typography variant="h1" color="accent" align="center" className="mb-8" id="bio-title">
+          {bio.title}
         </Typography>
-      </GlassmorphismCard>
+      </Reveal>
+      <Reveal delay={0.1}>
+        <GlassmorphismCard className="p-6 md:p-8">
+          {bio.paragraphs.map((paragraph) => (
+            <Typography key={paragraph.slice(0, 32)} variant="body1" className="mt-4 leading-relaxed text-stellar-white/90 first:mt-0">
+              {paragraph}
+            </Typography>
+          ))}
+        </GlassmorphismCard>
+      </Reveal>
     </section>
   );
 }

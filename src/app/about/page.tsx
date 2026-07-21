@@ -1,6 +1,12 @@
 import BioSection from '@/components/about/BioSection';
 import ExperienceSection from '@/components/about/ExperienceSection';
 import SkillsSection from '@/components/about/SkillsSection';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Sobre mí — Willyb0t',
+  description: 'Biografía, experiencia profesional y habilidades técnicas de Willyb0t.',
+};
 
 export default function AboutPage() {
   return (
