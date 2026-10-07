@@ -58,10 +58,10 @@ export const projects: Project[] = [
     id: 'elt-sap-b1-pipeline',
     title: 'ELT Pipeline for SAP B1 Data',
     description:
-      'Pipeline ELT (Extract, Load, Transform) de nivel empresarial que extrae datos de SAP Business One, los procesa con dbt y los carga en un almacén de datos PostgreSQL para su visualización en Power BI, habilitando inteligencia de negocio integral.',
+      'Pipeline ELT (Extract, Load, Transform) de nivel empresarial que extrae datos de SAP Business One, los procesa con dbt y los carga en un almacén de datos PostgreSQL para su visualización en Power BI, habilitando inteligencia de negocio integral. No se ecuentra disponible debido a que es un proyecto privado para una empresa.',
     image: '/images/elt-sap-b1.jpg',
     technologies: ['Python', 'Apache Airflow', 'dbt', 'PostgreSQL', 'Power BI', 'SAP B1', 'Docker', 'SQLServer'],
-    githubUrl: 'https://github.com/Willyb0t/elt-sap-b1-pipeline',
+    //githubUrl: 'https://github.com/Willyb0t/elt-sap-b1-pipeline',
     //liveUrl: 'https://elt-sap-b1.willyb0t.dev',
     featured: false,
   },
@@ -69,10 +69,10 @@ export const projects: Project[] = [
     id: 'data-science-project',
     title: 'Predicción de baja de alumnos en el Tec de Monterrey usando Machine Learning',
     description:
-      'Como parte de una colaboración con el Tec de Monterrey, se usaron datos de esta institucion para entrenar algunos modelos de IA para predecir la baja de los alumnos, y obviamente comparar las metricas, proyecto en el cual fui el lider de mi equipo.',
+      'Como parte de una colaboración con el Tec de Monterrey, se usaron datos de esta institucion para entrenar algunos modelos de IA para predecir la baja de los alumnos, y obviamente comparar las metricas, proyecto en el cual fui el lider de mi equipo. Trabajo supervisado por investigadoras del Tec de Monterrey y de la UAEMex',
     image: '/images/elt-sap-b1.jpg',
     technologies: ['Python', 'Scikit-learn','Numpy','Pandas','MatPlotLib'],
-    githubUrl: 'https://github.com/Willyb0t',
+    githubUrl: 'https://github.com/Willyb0t/student_dropout_DS',
     //liveUrl: 'https://elt-sap-b1.willyb0t.dev',
     featured: false,
   },
@@ -83,8 +83,19 @@ export const projects: Project[] = [
       'Desarrolle un sistema IoT simple pero funcional de acceso basado en RFID que funciona sobre AWS usando un ESP32, hardware RFID, nodejs, AWS y SUPABASE, ademas automaticamente genera metricas para su futuro analisis, y un dashboard web funcional en escritorio y dispositivos moviles.',
     image: '/images/elt-sap-b1.jpg',
     technologies: ['NodeJs','ESP32','AWS','SUPABASE','Nextjs','RFID'],
-    githubUrl: 'https://github.com/Willyb0t',
+    githubUrl: 'https://github.com/Willyb0t/gym_access_RFID',
     //liveUrl: 'https://elt-sap-b1.willyb0t.dev',
     featured: false,
   },
+  {
+    id: 'Thesis project',
+    title: 'Modelado y caracterización de la dispersion de contaminantes en la ZMVT mediante aprendizaje automatico y su impacto en areas habitacionales',
+    description:
+      'Como parte de mi tesis de licenciatura, estoy desarrollando un modelo de aprendizaje automatico que permita caracterizar y modelar la dispersion de contaminantes en la zona metropolitana del valle de Toluca, y su impacto en areas habitacionales, usando datos historicos y actuales de contaminacion, meteorologia y geografia. Por el momento el codigo no se encuentra disponible al publico y sera liberado en cuanto el trabajo este completo y publicado. El trabajo esta siendo supervisado por dos investigadores de la UAEMex, una de estos es SNII nivel 2. Hasta ahora se ha desarrollado una U-Net para segmentacion de plumas de humo, adicional se ha desarrollado tambien una attention-U-net para mejorar la segmentacion de plumas de humo, siendo los proximos pasos a realizar las series temporales con LSTM y la caracterizacion de contaminantes usando AERMOD/HISPLYT.',
+    image: '/images/elt-sap-b1.jpg',
+    technologies: ['Python','Scikit-learn','Numpy','Pandas','MatPlotLib','Tensorflow'],
+    githubUrl: 'not public yet',
+    //liveUrl: 'https://elt-sap-b1.willyb0t.dev',
+    featured: false,
+  }
 ];

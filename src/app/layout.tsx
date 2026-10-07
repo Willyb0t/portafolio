@@ -12,7 +12,7 @@ const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jet
 
 export const metadata: Metadata = {
   title: 'Willyb0t — Portafolio',
-  description: 'Portafolio de Willyb0t — Entusiasta de la física y desarrollador full-stack.',
+  description: 'Portafolio de Willyb0t — Data Science y Machine Learning Engineer buscando desarrollar su carrera profesional.',
 };
 
 export const viewport: Viewport = {

@@ -2,7 +2,7 @@
 
 export const hero = { 
   name: 'Willyb0t',
-  tagline: 'Entusiasta de la IA, ML, Fisica y Astronomia, ademas desarrollador Full Stack enfocado en el backend',
+  tagline: 'Data Scientist/Machine Learning Engineer en formacion - he construido pipelines de datos y soluciones de IA para diversas aplicaciones y de extremo a extremo.',
   subtitle: 'Construyendo soluciones basadas en IA y ML.',
   primaryCta: { label: 'Sobre mí', href: '/about' },
   secondaryCta: { label: 'Ver proyectos', href: '/portfolio' },
@@ -37,7 +37,7 @@ export const features = [
 export const bio = {
   title: 'Sobre mí',
   paragraphs: [
-    'Soy un graduado de ingenieria en computacion, a quien le apasiona bastante la física y la astronomia, así como la IA y el Machine Learning en busca de desarrollar su carrera profesional.',
+    'Soy un graduado de ingenieria en computacion, a quien le apasiona bastante la física y la astronomia, así como la IA y el Machine Learning, en busca de desarrollar su carrera profesional.',
     'Mi formación en ingenieria en computación me permitio adquirir la habilidad de resolver problemas complejos, y proporner soluciones tecnologicas modernas y escalables.',
     'También me gusta mucho la inteligencia de negocio y la analitica, ya que se pueden encontrar oportunidades de mejorar procesos y apoyar el negocio en una organizacion.',
   ],
@@ -121,7 +121,7 @@ export const skillCategories = [
   },
   {
     title: 'IA y ML',
-    skills: ['Scikit-learn', 'Ollama', 'PyTorch','Probabilidad y Estadistica', 'Aprendizaje Automatico'],
+    skills: ['Scikit-learn', 'Ollama','Probabilidad y Estadistica', 'Aprendizaje Automatico', 'Tensorflow', 'Numpy', 'Pandas', 'Matplotlib'],
   },
 ];
 
@@ -140,7 +140,6 @@ export const portfolioContent = {
   allFilter: 'Todos',
   featured: 'DESTACADO',
   github: 'GitHub',
-  liveDemo: 'Demo en vivo',
 };
 
 // ─── Contacto ───────────────────────────────────────────────────────────────
