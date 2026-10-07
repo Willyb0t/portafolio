@@ -10,7 +10,7 @@ export const hero = {
 
 export const stats = [
   { value: '5+', label: 'Proyectos' },
-  { value: '0.5', label: 'Años de experiencia' },
+  { value: '2', label: 'Proyectos en colaboracion con una SNII nivel 2' },
   { value: '10+', label: 'Tecnologías' },
 ];
 
