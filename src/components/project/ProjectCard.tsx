@@ -64,7 +64,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             rel="noopener noreferrer"
             className="text-sm text-electric-blue transition-colors hover:text-stellar-white"
           >
-            {portfolioContent.liveDemo}
           </Link>
         )}
       </div>
