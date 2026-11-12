@@ -14,6 +14,11 @@ export default function HeroSection() {
     <section className="flex flex-col items-center text-center">
       <Reveal>
         <h1 className="font-display text-4xl font-bold tracking-wider text-stellar-white md:text-6xl">
+          Jesus Elian Peralta Chavez
+        </h1>
+      </Reveal>
+      <Reveal>
+        <h1 className="font-display text-4xl font-bold tracking-wider text-stellar-white md:text-6xl">
           {hero.name}
         </h1>
       </Reveal>
